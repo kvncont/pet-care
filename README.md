@@ -29,7 +29,7 @@ python -m venv <folder_name>
 . ./<folder_name>/Scripts/activate
 ```
 
-## Deactivate virtual environment
+### Deactivate virtual environment
 ```
 deactivate
 ```
@@ -51,7 +51,7 @@ $Env:COSMOS_CONTAINER="xxxxxxxxxxxxxxxxxxxx"
 
 # Usage Example
 
-## Test API (Endpoints)
+### Test API (Endpoints)
 
 ```bash
 # Docs (Swagger)
@@ -71,7 +71,7 @@ http://127.0.0.1:8000/pet
 http://127.0.0.1:8000/pet/{id}
 ```
 
-## JSON Body (PUT)
+### JSON Body (PUT)
 ```json
 {
   "name": "Doki",
