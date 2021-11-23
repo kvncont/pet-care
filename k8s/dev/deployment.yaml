@@ -13,7 +13,28 @@ spec:
     spec:
       containers:
       - name: pet-care
-        image: kvncont/pet-care:0.0.1
+        image: <image_name>:<tag>
+        env:
+        - name: COSMOS_URI
+          valueFrom:
+            configMapKeyRef:
+              name: pet-care-configmap
+              key: cosmos_uri
+        - name: COSMOS_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: pet-care-configmap
+              key: cosmos_key
+        - name: COSMOS_DB
+          valueFrom:
+            configMapKeyRef:
+              name: pet-care-configmap
+              key: cosmos_database
+        - name: COSMOS_CONTAINER
+          valueFrom:
+            configMapKeyRef:
+              name: pet-care-configmap
+              key: cosmos_container
         resources:
           requests:
             memory: "32Mi"

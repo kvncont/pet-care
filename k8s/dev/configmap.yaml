@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pet-care-configmap
+data:
+  cosmos_uri: YOUR_URI
+  # Must be a secret
+  cosmos_key: YOUR_KEY
+  cosmos_database: YOUR_DB
+  cosmos_container: YOUR_CONTAINER
