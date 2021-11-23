@@ -1,10 +1,13 @@
-# Virtual environment
+# Pet Care API
+API Demo created with [FastAPI](https://fastapi.tiangolo.com/) + [CosmosDB](https://azure.microsoft.com/es-es/free/cosmos-db/)
 
-### Install venv
+## Virtual environment (Local Development)
+
+### Install virtual environment
 ```
 pip install virtualenv
 ```
-### Create venv
+### Create virtual environment
 ```bash
 # OSX / Linux(Bash)
 virtualenv <folder_name>
@@ -34,7 +37,7 @@ python -m venv <folder_name>
 deactivate
 ```
 
-# Create env vars
+### Create env vars
 ```bash
 # OSX / Linux(Bash)
 export COSMOS_URI="xxxxxxxxxxxxxxxxxxxxxxxx"
@@ -49,13 +52,15 @@ $Env:COSMOS_DB="xxxxxxxxxxxxxxxxxxxxxxxxxxx"
 $Env:COSMOS_CONTAINER="xxxxxxxxxxxxxxxxxxxx"
 ```
 
-# Usage Example
+## Usage Example
 
 ### Test API (Endpoints)
 
 ```bash
 # Docs (Swagger)
 http://127.0.0.1:8000/docs
+
+# Docs (ReDoc)
 http://127.0.0.1:8000/redoc
 
 # Find all pets (GET)
@@ -161,4 +166,16 @@ http://127.0.0.1:8000/pet/{id}
     }
   ]
 }
+```
+
+## Run as Docker container
+```docker
+docker build -t <image_name>:<tag> .
+
+docker run --name pet-care -p 8000:8000 -e COSMOS_URI="YOUR_URI" -e COSMOS_KEY="YOUR_KEY" -e COSMOS_DB="YOUR_DB" -e COSMOS_CONTAINER="YOUR_CONTAINER" <image_name>:<tag>
+```
+
+## Run on Kubernetes cluster
+```bash
+kubectl apply -f k8s/dev/.
 ```

@@ -33,6 +33,6 @@ async def upsert_pet(pet: Pet):
 
 
 @router.delete("/{id}", status_code=204)
-def delete_pet_by_id(id: str):
+async def delete_pet_by_id(id: str):
     container.delete_item(id, partition_key=id)
     return Response(status_code=204)
