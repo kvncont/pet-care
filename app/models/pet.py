@@ -2,9 +2,9 @@ from typing import List, Optional
 
 from pydantic.main import BaseModel
 
-from ..model.deworming import Deworming
-from ..model.owner import Owner
-from ..model.vaccine import Vaccine
+from ..models.deworming import Deworming
+from ..models.owner import Owner
+from ..models.vaccine import Vaccine
 
 
 class Pet(BaseModel):

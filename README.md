@@ -88,14 +88,14 @@ http://127.0.0.1:8000/pet/{id}
   "owners": [
     {
       "id": "000000000",
-      "name": "Betty",
+      "name": "Beatriz",
       "last_name": "Pinzón",
       "address": {
         "country": "Colombia",
         "city": "Bogotá"
       },
       "contact": {
-        "email": "betyy@example.com",
+        "email": "Beatriz@example.com",
         "phone": "88448844"
       }
     }

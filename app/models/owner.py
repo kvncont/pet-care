@@ -2,8 +2,8 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
-from ..model.adreess import Address
-from ..model.contact import Contact
+from ..models.adreess import Address
+from ..models.contact import Contact
 
 
 class Owner(BaseModel):

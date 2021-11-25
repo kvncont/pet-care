@@ -3,7 +3,7 @@ import uuid
 from fastapi import APIRouter, Response
 
 from ..config.db import container
-from ..model.pet import Pet
+from ..models.pet import Pet
 
 router = APIRouter(
     prefix="/pets",
