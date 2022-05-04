@@ -3,36 +3,36 @@ API Demo created with [FastAPI](https://fastapi.tiangolo.com/) + [CosmosDB](http
 
 ## Virtual environment (Local Development)
 
-### Install virtual environment
+### Install virtual environment (In case you don't have it)
 ```
 pip install virtualenv
 ```
 ### Create virtual environment
 ```bash
 # OSX / Linux(Bash)
-virtualenv <folder_name>
+virtualenv venv
 
 # Windows
-python -m venv <folder_name>
+python -m venv venv
 ```
 
 ### Activate virtual environment
 
 ```bash
 # OSX / Linux(Bash)
-<folder_name>/bin/activate
+venv/bin/activate
 
 # CMD
-<folder_name>\Scripts\Activate.bat
+venv\Scripts\Activate.bat
 
 # Powershell
-<folder_name>\Scripts\Activate.ps1
+venv\Scripts\Activate.ps1
 
 # Bash Shell
-. ./<folder_name>/Scripts/activate
+. ./venv/Scripts/activate
 ```
 
-### Deactivate virtual environment
+### Deactivate virtual environment (Optional - In case you want to deactivate the virtual environment)
 ```
 deactivate
 ```
@@ -56,16 +56,18 @@ $Env:COSMOS_CONTAINER="xxxxxxxxxxxxxxxxxxxx"
 ```bash
 # Download dependencies
 pip install --no-cache-dir --upgrade -r requirements.txt
-# Run servers
+
+# Run the uvicorn server
 uvicorn app.main:app --port 8000 --reload
 ```
 
 ### Run as Docker container
 ```bash
+# Build the image
 docker build -t pet-care:1.0 .
 
-# Use your cosmos account values
-docker run --name pet-care -p 8000:8000 -e COSMOS_URI="YOUR_URI" -e COSMOS_KEY="YOUR_KEY" -e COSMOS_DB="YOUR_DB" -e COSMOS_CONTAINER="YOUR_CONTAINER" <image_name>:<tag>
+# Export the environment variables and run the container
+docker run --name pet-care -p 8000:8000 -e COSMOS_URI -e COSMOS_KEY -e COSMOS_DB -e COSMOS_CONTAINER pet-care:1.0
 ```
 
 ### Run on Kubernetes cluster
