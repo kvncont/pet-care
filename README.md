@@ -37,7 +37,7 @@ python -m venv <folder_name>
 deactivate
 ```
 
-### Create env vars
+### Create environment variables
 ```bash
 # OSX / Linux(Bash)
 export COSMOS_URI="xxxxxxxxxxxxxxxxxxxxxxxx"
@@ -50,6 +50,29 @@ $Env:COSMOS_URI="xxxxxxxxxxxxxxxxxxxxxxxxxx"
 $Env:COSMOS_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxx"
 $Env:COSMOS_DB="xxxxxxxxxxxxxxxxxxxxxxxxxxx"
 $Env:COSMOS_CONTAINER="xxxxxxxxxxxxxxxxxxxx"
+```
+
+### Run locally
+```bash
+# Download dependencies
+pip install --no-cache-dir --upgrade -r requirements.txt
+# Run servers
+uvicorn app.main:app --port 8000 --reload
+```
+
+### Run as Docker container
+```bash
+docker build -t pet-care:1.0 .
+
+# Use your cosmos account values
+docker run --name pet-care -p 8000:8000 -e COSMOS_URI="YOUR_URI" -e COSMOS_KEY="YOUR_KEY" -e COSMOS_DB="YOUR_DB" -e COSMOS_CONTAINER="YOUR_CONTAINER" <image_name>:<tag>
+```
+
+### Run on Kubernetes cluster
+```bash
+# Execute the docker build & push
+# Change the configmap values (Use your cosmos account values)
+kubectl apply -f k8s/dev/.
 ```
 
 ## Usage Example
@@ -69,11 +92,12 @@ http://127.0.0.1:8000/pets
 # Find pet by id (GET
 http://127.0.0.1:8000/pet/{id}
 
+# Delete pet by id (DELETE)
+http://127.0.0.1:8000/pet/{id}
+
 # Upsert pet (PUT)
 http://127.0.0.1:8000/pet
 
-# Delete pet by id (DELETE)
-http://127.0.0.1:8000/pet/{id}
 ```
 
 ### JSON Body (PUT)
@@ -166,16 +190,4 @@ http://127.0.0.1:8000/pet/{id}
     }
   ]
 }
-```
-
-## Run as Docker container
-```docker
-docker build -t <image_name>:<tag> .
-
-docker run --name pet-care -p 8000:8000 -e COSMOS_URI="YOUR_URI" -e COSMOS_KEY="YOUR_KEY" -e COSMOS_DB="YOUR_DB" -e COSMOS_CONTAINER="YOUR_CONTAINER" <image_name>:<tag>
-```
-
-## Run on Kubernetes cluster
-```bash
-kubectl apply -f k8s/dev/.
 ```

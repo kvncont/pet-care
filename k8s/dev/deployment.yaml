@@ -13,7 +13,9 @@ spec:
     spec:
       containers:
       - name: pet-care
-        image: <image_name>:<tag>
+        image: pet-care:1.0
+        ports:
+        - containerPort: 8000
         env:
         - name: COSMOS_URI
           valueFrom:
@@ -42,5 +44,3 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
-        ports:
-        - containerPort: 8000
