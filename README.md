@@ -1,44 +1,67 @@
 # Pet Care API
 API Demo created with [FastAPI](https://fastapi.tiangolo.com/) + [CosmosDB](https://azure.microsoft.com/es-es/free/cosmos-db/)
 
-## Virtual environment (Local Development)
+# Table of Contents
+1. [Run locally](#run-locally)
+2. [Run as Container](#run-as-container)
+3. [Run on Kubernetes](#run-on-kubernetes)
 
-### Install virtual environment (In case you don't have it)
-```
-pip install virtualenv
-```
-### Create virtual environment
+## Run locally
 ```bash
-# OSX / Linux(Bash)
+# Install virtual environment (In case you don't have it)
+pip install virtualenv
+
+# Create the virtual environment
+## OSX / Linux(Bash)
 virtualenv venv
 
-# Windows
+## Windows
 python -m venv venv
-```
 
-### Activate virtual environment
-
-```bash
-# OSX / Linux(Bash)
+# Activate virtual environment
+## OSX / Linux(Bash)
 venv/bin/activate
 
-# CMD
+## CMD
 venv\Scripts\Activate.bat
 
-# Powershell
+## Powershell
 venv\Scripts\Activate.ps1
 
-# Bash Shell
+## Bash Shell
 . ./venv/Scripts/activate
-```
 
-### Deactivate virtual environment (Optional - In case you want to deactivate the virtual environment)
-```
+# Create the environment variables
+## OSX / Linux(Bash)
+export COSMOS_URI="xxxxxxxxxxxxxxxxxxxxxxxx"
+export COSMOS_KEY="xxxxxxxxxxxxxxxxxxxxxxxx"
+export COSMOS_DB="xxxxxxxxxxxxxxxxxxxxxxxxx"
+export COSMOS_CONTAINER="xxxxxxxxxxxxxxxxxx"
+
+## Windows (Powershell)
+$Env:COSMOS_URI="xxxxxxxxxxxxxxxxxxxxxxxxxx"
+$Env:COSMOS_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxx"
+$Env:COSMOS_DB="xxxxxxxxxxxxxxxxxxxxxxxxxxx"
+$Env:COSMOS_CONTAINER="xxxxxxxxxxxxxxxxxxxx"
+
+# Download dependencies
+pip install --no-cache-dir --upgrade -r requirements.txt
+
+# Run the uvicorn server
+uvicorn app.main:app --port 8000 --reload
+
+
+# Deactivate virtual environment
+# (Optional - In case you want to deactivate the virtual environment)
 deactivate
 ```
 
-### Create environment variables
+## Run as container
 ```bash
+# Build the image
+docker build -t pet-care:1.0 .
+
+# Create the environment variables
 # OSX / Linux(Bash)
 export COSMOS_URI="xxxxxxxxxxxxxxxxxxxxxxxx"
 export COSMOS_KEY="xxxxxxxxxxxxxxxxxxxxxxxx"
@@ -50,29 +73,19 @@ $Env:COSMOS_URI="xxxxxxxxxxxxxxxxxxxxxxxxxx"
 $Env:COSMOS_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxx"
 $Env:COSMOS_DB="xxxxxxxxxxxxxxxxxxxxxxxxxxx"
 $Env:COSMOS_CONTAINER="xxxxxxxxxxxxxxxxxxxx"
+
+# Run the container
+docker run --name pet-care --rm -d -p 8000:8000 -e COSMOS_URI -e COSMOS_KEY -e COSMOS_DB -e COSMOS_CONTAINER pet-care:1.0
 ```
 
-### Run locally
-```bash
-# Download dependencies
-pip install --no-cache-dir --upgrade -r requirements.txt
-
-# Run the uvicorn server
-uvicorn app.main:app --port 8000 --reload
-```
-
-### Run as Docker container
+## Run on kubernetes
 ```bash
 # Build the image
-docker build -t pet-care:1.0 .
+docker build -t myregistry/pet-care:1.0 .
 
-# Export the environment variables and run the container
-docker run --name pet-care -p 8000:8000 -e COSMOS_URI -e COSMOS_KEY -e COSMOS_DB -e COSMOS_CONTAINER pet-care:1.0
-```
+# Push the image to the registry
+docker push myregistry/pet-care:1.0
 
-### Run on Kubernetes cluster
-```bash
-# Execute the docker build & push
 # Change the configmap values (Use your cosmos account values)
 kubectl apply -f k8s/dev/.
 ```

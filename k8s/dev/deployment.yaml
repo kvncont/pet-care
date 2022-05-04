@@ -6,6 +6,7 @@ spec:
   selector:
     matchLabels:
       app: pet-care
+  replicas: 3
   template:
     metadata:
       labels:
@@ -39,7 +40,7 @@ spec:
               key: cosmos_container
         resources:
           requests:
-            memory: "32Mi"
+            memory: "16Mi"
             cpu: "100m"
           limits:
             memory: "128Mi"
